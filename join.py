@@ -1,5 +1,7 @@
 import MapReduce
 import sys
+import itertools
+import operator
 
 mr = MapReduce.MapReduce()
 
@@ -8,13 +10,10 @@ def mapper(record):
   mr.emit_intermediate(order_id, record)
 
 def reducer(key, values):
-  joined = []
-  for v in values:
-    if v[0] == 'order':
-      joined = v+joined
-    else:
-      joined += v
-  mr.emit(joined)
+  order = [values[0]]
+  items = values[1:]
+  for p in itertools.product(order, items):
+    mr.emit(reduce(operator.add, p))
 
 if __name__ == '__main__':
   inputdata = open(sys.argv[1])
