@@ -4,17 +4,17 @@ import sys
 mr = MapReduce.MapReduce()
 
 def mapper(record):
-  key = record[0]
+  index = record[0]
   value = record[1]
   text = value.split()
   for word in text:
-    mr.emit_intermediate(word, key)
+    mr.emit_intermediate(word, index)
 
 def reducer(key, values):
-  ids = set()
+  indices = set()
   for v in values:
-    ids.add(v)
-  mr.emit((key, list(ids)))
+    indices.add(v)
+  mr.emit((key, list(indices)))
 
 if __name__ == '__main__':
   inputdata = open(sys.argv[1])
