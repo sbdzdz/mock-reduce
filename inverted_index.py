@@ -5,9 +5,8 @@ mr = MapReduce.MapReduce()
 
 def mapper(record):
   index = record[0]
-  value = record[1]
-  text = value.split()
-  for word in text:
+  text = record[1]
+  for word in text.split():
     mr.emit_intermediate(word, index)
 
 def reducer(key, values):
