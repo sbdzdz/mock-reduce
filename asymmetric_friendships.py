@@ -9,9 +9,10 @@ def mapper(record):
   mr.emit_intermediate(record[0], record[1])
 
 def reducer(key, list_of_values):
-  for v in set(list_of_values):
-    mr.emit((key, v))
-    mr.emit((v, key))
+  for v in list_of_values:
+    if list_of_values.count(v) == 1:
+      mr.emit((key, v))
+      mr.emit((v, key))
 
 if __name__ == '__main__':
   inputdata = open(sys.argv[1])
