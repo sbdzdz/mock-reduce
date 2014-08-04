@@ -1,6 +1,5 @@
 import MapReduce
 import sys
-import itertools
 
 mr = MapReduce.MapReduce()
 
