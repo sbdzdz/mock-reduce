@@ -7,7 +7,7 @@ def mapper(record):
   trimmed = record[1][:-10]
   mr.emit_intermediate(trimmed, None)
 
-def reducer(key, list_of_values):
+def reducer(key, values):
   mr.emit((key))
 
 if __name__ == '__main__':

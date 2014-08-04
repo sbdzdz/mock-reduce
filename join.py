@@ -10,9 +10,9 @@ def mapper(record):
   mr.emit_intermediate(order_id, record)
 
 def reducer(key, values):
-  order = [values[0]]
+  order = values[0]
   items = values[1:]
-  for p in itertools.product(order, items):
+  for p in itertools.product([order], items):
     mr.emit(reduce(operator.add, p))
 
 if __name__ == '__main__':
