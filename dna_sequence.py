@@ -5,12 +5,11 @@ import itertools
 mr = MapReduce.MapReduce()
 
 def mapper(record):
-  seq = record[1]
-  mr.emit_intermediate(seq[:-10], seq[:-10])
+  trimmed = record[1][:-10]
+  mr.emit_intermediate(trimmed, None)
 
 def reducer(key, list_of_values):
-  for v in set(list_of_values):
-    mr.emit((v))
+  mr.emit((key))
 
 if __name__ == '__main__':
   inputdata = open(sys.argv[1])
